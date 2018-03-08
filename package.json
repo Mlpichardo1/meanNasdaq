@@ -1,0 +1,19 @@
+{
+  "name": "meannasdaq",
+  "version": "0.0.1",
+  "description": "nasdaq website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mlpichardo1/meanNasdaq.git"
+  },
+  "author": "Manny Pichardo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mlpichardo1/meanNasdaq/issues"
+  },
+  "homepage": "https://github.com/Mlpichardo1/meanNasdaq#readme"
+}
