@@ -10,14 +10,14 @@ function config($httpProvider, $routeProvider) {
         restricted: false
       }
     })
-    // .when('/stocks', {
-    //   templateUrl: 'angular-app/hotel-list/hotels.html',
-    //   controller: HotelsController,
-    //   controllerAs: 'vm',
-    //   access: {
-    //     restricted: false
-    //   }
-    // })
+    .when('/stocks', {
+      templateUrl: 'angular-app/stock-list/stock-list.html',
+      controller: StocksController,
+      controllerAs: 'vm',
+      access: {
+        restricted: false
+      }
+    })
     // .when('/profile', {
     //   templateUrl: 'angular-app/profile/profile.html',
     //   access: {
