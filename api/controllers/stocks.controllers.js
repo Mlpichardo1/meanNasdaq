@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+// var Stock = require('../data/companylist.csv');
 var Stock = mongoose.model('Stock');
 
 
@@ -135,7 +136,7 @@ module.exports.stocksAddOne = function(req, res) {
 module.exports.stocksUpdateOne = function(req, res) {
   var stockId = req.params.stockId;
 
-  console.log('GET stockId', stockhotelId);
+  console.log('GET stockId', stockId);
 
   Stock
     .findById(stockId)
@@ -152,7 +153,7 @@ module.exports.stocksUpdateOne = function(req, res) {
         res
           .status(404)
           .lson({
-            "message" : "Hotel ID not found " + stockId
+            "message" : "Stock ID not found " + stockId
           });
           return;
       }

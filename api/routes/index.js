@@ -1,20 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-// var ctrlHotels = require('../controllers/hotels.controllers.js');
+var ctrlStocks = require('../controllers/stocks.controllers.js');
 // var ctrlReviews = require('../controllers/reviews.controllers.js');
 // var ctrlUsers = require('../controllers/users.controllers.js');
 
 // Hotel routes
-// router
-//   .route('/hotels')
-//   .get(ctrlHotels.hotelsGetAll)
-//   .post(ctrlHotels.hotelsAddOne);
+router
+  .route('/stocks')
+  .get(ctrlStocks.stocksGetAll)
+  .post(ctrlStocks.stocksAddOne);
 
-// router
-//   .route('/hotels/:hotelId')
-//   .get(ctrlHotels.hotelsGetOne)
-//   .put(ctrlHotels.hotelsUpdateOne);
+router
+  .route('/stocks/:stockId')
+  .get(ctrlStocks.stocksGetOne)
+  .put(ctrlStocks.stocksUpdateOne);
 
 
 // // Review routes
@@ -28,13 +28,13 @@ var router = express.Router();
 //   .get(ctrlReviews.reviewsGetOne)
 //   .put(ctrlReviews.reviewsUpdateOne);
 
-// // Authentication
-// router
-//   .route('/users/register')
+// Authentication
+router
+  .route('/users/register')
 //   .post(ctrlUsers.register);
 
 //   router
 //     .route('/users/login')
 //     .post(ctrlUsers.login);
 
-// module.exports = router;
+module.exports = router;

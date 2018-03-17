@@ -1,3 +1,4 @@
+
 angular.module('meannasdaq', ['ngRoute', 'angular-jwt']).config(config).run(run);
 
 function config($httpProvider, $routeProvider) {
