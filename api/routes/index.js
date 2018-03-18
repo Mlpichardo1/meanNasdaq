@@ -3,7 +3,7 @@ var router = express.Router();
 
 var ctrlStocks = require('../controllers/stocks.controllers.js');
 // var ctrlReviews = require('../controllers/reviews.controllers.js');
-// var ctrlUsers = require('../controllers/users.controllers.js');
+var ctrlUsers = require('../controllers/users.controllers.js');
 
 // Hotel routes
 router
@@ -31,10 +31,10 @@ router
 // Authentication
 router
   .route('/users/register')
-//   .post(ctrlUsers.register);
+  .post(ctrlUsers.register);
 
-//   router
-//     .route('/users/login')
-//     .post(ctrlUsers.login);
+  router
+    .route('/users/login')
+    .post(ctrlUsers.login);
 
 module.exports = router;

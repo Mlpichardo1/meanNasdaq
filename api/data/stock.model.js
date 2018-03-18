@@ -1,33 +1,33 @@
 var mongoose = require('mongoose');
 
-// var reviewSchema = new mongoose.Schema({
-//   name : {
-//     type : String,
-//     required : true
-//   },
-//   rating : {
-//     type : Number,
-//     required : true,
-//     min : 0,
-//     max : 5
-//   },
-//   review : {
-//     type : String,
-//     required : true
-//   },
-//   createdOn : {
-//     type : Date,
-//     "default" : Date.now
-//   }
-// });
+var reviewSchema = new mongoose.Schema({
+  name : {
+    type : String,
+    required : true
+  },
+  rating : {
+    type : Number,
+    required : true,
+    min : 0,
+    max : 5
+  },
+  review : {
+    type : String,
+    required : true
+  },
+  createdOn : {
+    type : Date,
+    "default" : Date.now
+  }
+});
 
-// var roomSchema = new mongoose.Schema({
-//   type : String,
-//   number : Number,
-//   description : String,
-//   photos : [String],
-//   price : Number
-// });
+var roomSchema = new mongoose.Schema({
+  type : String,
+  number : Number,
+  description : String,
+  photos : [String],
+  price : Number
+});
 
 var stockSchema = new mongoose.Schema({
   name : {
