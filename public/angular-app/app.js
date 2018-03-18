@@ -6,7 +6,7 @@ function config($httpProvider, $routeProvider) {
 
   $routeProvider
     .when('/', {
-      templateUrl: 'public/index.html',
+      templateUrl: 'angular-app/main/main.html',
       access: {
         restricted: false
       }
@@ -19,6 +19,15 @@ function config($httpProvider, $routeProvider) {
         restricted: false
       }
     })
+        .when('/stock/:id', {
+      templateUrl: 'angular-app/stock-display/stock-display.html',
+      controller: StockController,
+      controllerAs: 'vm',
+      access: {
+        restricted: false
+      }
+    })
+    
     // .when('/profile', {
     //   templateUrl: 'angular-app/profile/profile.html',
     //   access: {

@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var Stock = mongoose.model('Stock');
 
 
-
 module.exports.stocksGetAll = function(req, res) {
 
   console.log('GET the stocks');

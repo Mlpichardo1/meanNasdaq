@@ -1,4 +1,4 @@
-angular.module('meanhotel').controller('LoginController', LoginController);
+angular.module('meannasdaq').controller('LoginController', LoginController);
 
 function LoginController($http, $location, $window, AuthFactory, jwtHelper) {
   var vm = this;
