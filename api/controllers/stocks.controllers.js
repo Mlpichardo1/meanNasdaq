@@ -1,187 +1,168 @@
 var mongoose = require('mongoose');
-// var Stock = require('../data/companylist.csv');
-var Stock = mongoose.model('Stock');
-
+var Stock = mongoose.model('Stock')
 
 module.exports.stocksGetAll = function(req, res) {
 
-  console.log('GET the stocks');
-  console.log(req.query);
+    var offset = 0;
+    var count = 3500;
+    //count works with datafactory and stocklist controller for # items to display
+    var maxCount = 3500;
 
-  var offset = 0;
-  var count = 5;
-  var maxCount = 50;
+    if (req.query && req.query.offset) {
+        offset = parseInt(req.query.offset, 10);
+        //because queries come in a string, have to use parseInt
+    }
 
-
-  if (req.query && req.query.offset) {
-    offset = parseInt(req.query.offset, 10);
-  }
-
-  if (req.query && req.query.count) {
-    count = parseInt(req.query.count, 10);
-  }
-
-  if (isNaN(offset) || isNaN(count)) {
-    res
-      .status(400)
-      .json({
-        "message" : "If supplied in querystring, count and offset must both be numbers"
-      });
-    return;
-  }
-
-  if (count > maxCount) {
-    res
-      .status(400)
-      .json({
-        "message" : "Count limit of " + maxCount + " exceeded"
-      });
-    return;
-  }
-
-  Stock
-    .find()
-    .skip(offset)
-    .limit(count)
-    .exec(function(err, stocks) {
-      console.log(err);
-      console.log(stocks);
-      if (err) {
-        console.log("Error finding stocks");
+    if (req.query && req.query.count) {
+        count = parseInt(req.query.count, 10);
+        //because queries come in a string, have to use parseInt
+    }
+    if (isNaN(offset) || isNaN(count)) {
         res
-          .status(500)
-          .json(err);
-      } else {
-        console.log("Found stocks", stocks.length);
-        res
-          .json(stocks);
-      }
-    });
+            .status(400)
+            .json({
+                "message": "if supplied in querystring, count and offset should be numbers"
 
+            });
+        return;
+    }
+
+    if (count > maxCount) {
+        res
+            .status(400)
+            .json({
+                "message": "Count limit of " + maxCount + " exceeded"
+            });
+        return;
+    }
+
+    Stock
+        .find()
+        .skip(offset)
+        .limit(count)
+        .exec(function(err, stocks) {
+            if (err) {
+                console.log("Error finding stocks");
+                res
+                    .status(500)
+                    .json(err);
+            }
+            else {
+                console.log("found stocks", stocks.length);
+                res
+                    .json(stocks);
+            }
+        });
 };
 
 module.exports.stocksGetOne = function(req, res) {
-  var id = req.params.stockId;
+    var stockId = req.params.stockId;
+    // var thisStock = stockData(stockId);
+    //can stockId be symbol?
+    console.log("GET stockId", stockId);
 
-  console.log('GET stockId', id);
+    Stock
+        .findById(stockId)
+        .exec(function(err, doc) {
+            var response = {
+                status: 200,
+                message: doc
+            };
+            if (err) {
+                console.log("Error finding stock");
+                response.status = 500;
+                response.message = err;
 
-  Stock
-    .findById(id)
-    .exec(function(err, doc) {
-      var response = {
-        status : 200,
-        message : doc
-      };
-      if (err) {
-        console.log("Error finding stock");
-        response.status = 500;
-        response.message = err;
-      } else if(!doc) {
-        console.log("StockId not found in database", id);
-        response.status = 404;
-        response.message = {
-          "message" : "Stock ID not found " + id
-        };
-      }
-      res
-        .status(response.status)
-        .json(response.message);
-    });
-
+            }
+            else if (!doc) {
+                response.status = 404;
+                response.message = {
+                    "message": "Stock ID not found"
+                };
+            }
+            res
+                .status(response.status)
+                .json(response.message);
+        });
 };
-
-var _splitArray = function(input) {
-  var output;
-  if (input && input.length > 0) {
-    output = input.split(";");
-  } else {
-    output = [];
-  }
-  return output;
-};
-
-module.exports.stocksAddOne = function(req, res) {
-  console.log("POST new hotel");
-
-  Stock
-    .create({
-      name : req.body.name,
-      description : req.body.description,
-      stars : parseInt(req.body.stars,10),
-      services : _splitArray(req.body.services),
-      photos : _splitArray(req.body.photos),
-      currency : req.body.currency,
-      location : {
-        address : req.body.address,
-        coordinates : [parseFloat(req.body.lng), parseFloat(req.body.lat)]
-      }
-    }, function(err, stock) {
-      if (err) {
-        console.log("Error creating stock");
-        res
-          .status(400)
-          .json(err);
-      } else {
-        console.log("Stock created!", stock);
-        res
-          .status(201)
-          .json(stock);
-      }
-    });
-
-};
-
 
 module.exports.stocksUpdateOne = function(req, res) {
-  var stockId = req.params.stockId;
+    //probably not needed for comments and not updating stock info
+    var stockId = req.params.stockId;
+    // var thisStock = stockData(stockId);
+    //can stockId be symbol?
+    console.log("GET stockId", stockId);
 
-  console.log('GET stockId', stockId);
+    Stock
+        .findById(stockId)
+        .select("-comments")
+        //excluding subdocuments
 
-  Stock
-    .findById(stockId)
-    .select('-reviews -rooms')
-    .exec(function(err, stock) {
-      if (err) {
-        console.log("Error finding stock");
-        res
-          .status(500)
-          .json(err);
-          return;
-      } else if(!stock) {
-        console.log("StockId not found in database", stockId);
-        res
-          .status(404)
-          .lson({
-            "message" : "Stock ID not found " + stockId
-          });
-          return;
-      }
+        .exec(function(err, doc) {
+            var response = {
+                status: 200,
+                message: doc
+            };
+            if (err) {
+                console.log("Error finding stock");
+                response.status = 500;
+                response.message = err;
 
-      stock.name = req.body.name;
-      stock.description = req.body.description;
-      stock.stars = parseInt(req.body.stars,10);
-      stock.services = _splitArray(req.body.services);
-      stock.photos = _splitArray(req.body.photos);
-      stock.currency = req.body.currency;
-      stock.location = {
-        address : req.body.address,
-        coordinates : [parseFloat(req.body.lng), parseFloat(req.body.lat)]
-      };
+            }
+            else if (!doc) {
+                response.status = 404;
+                response.message = {
+                    "message": "Stock ID not found"
+                };
+            }
 
-      stock
-        .save(function(err, stockUpdated) {
-          if(err) {
-            res
-              .status(500)
-              .json(err);
-          } else {
-            res
-              .status(204)
-              .json();
-          }
+            if (response.status !== 200) {
+                res
+                    .status(response.status)
+                    .json(response.message);
+            }
+            else {
+                //if wanted to edit stocks would include all fields of object    
+                res
+                    .status(200)
+                    .json(doc);
+            }
         });
+};
 
+module.exports.getOneSymbol = function(req, res) {
+    var symbol = req.params.symbol;
 
-    });
+    // var thisStock = stockData(stockId);
+    //can stockId be symbol?
+    console.log("GET stockSymbol", symbol);
+    Stock
 
+        .find({ Symbol: symbol })
+        //({ parameter_name: req.params.name })
+        .exec(function(err, doc) {
+            // console.log(doc);
+            // console.log(err);
+
+            if (err) {
+                console.log("Error finding stock symbol");
+                res.status = 500;
+                res.message = err;
+
+            }
+            else if (!doc) {
+                console.log("!doc");
+                res.status(404)
+                    .json(
+                        "Stock Symbol not found")
+            }
+
+            else if (doc) {
+                console.log("res");
+                console.log("else if doc getOneSymbol in stockscontroller:", doc);
+                res
+                    .status(200)
+                    .json(doc);
+                }
+        });
 };

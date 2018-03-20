@@ -5,11 +5,11 @@ var ctrlStocks = require('../controllers/stocks.controllers.js');
 // var ctrlReviews = require('../controllers/reviews.controllers.js');
 var ctrlUsers = require('../controllers/users.controllers.js');
 
-// Hotel routes
+// Stock routes
 router
   .route('/stocks')
   .get(ctrlStocks.stocksGetAll)
-  .post(ctrlStocks.stocksAddOne);
+//   .post(ctrlStocks.stocksAddOne);
 
 router
   .route('/stocks/:stockId')
