@@ -4,9 +4,9 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
+// require("./models/stocks");
+
 var routes = require('./api/routes');
-
-
 
 // Define the port to run on
 app.set('port', process.env.PORT);

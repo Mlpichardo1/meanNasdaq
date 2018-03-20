@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Stock = mongoose.model('Stock')
+var Stock = mongoose.model('Stock');
 
 module.exports.stocksGetAll = function(req, res) {
 

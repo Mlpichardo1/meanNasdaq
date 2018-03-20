@@ -42,3 +42,7 @@ process.on('SIGTERM', function() {
     process.exit(0);
   });
 });
+
+// schemas and models
+require('./stock.model.js');
+require('./users.model.js');

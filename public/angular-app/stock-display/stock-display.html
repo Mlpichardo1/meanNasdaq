@@ -1,30 +1,19 @@
-<h1>{{ vm.stock.name }} <hotel-rating stars="vm.stars"></hotel-rating></h1>
+<h2><a ng-href="{{ vm.stock.StockUrl }}" target="blank">{{ vm.stock.Symbol }}</a> {{ vm.stock.Name }}</h2>
+<h3>Last Sale: {{ vm.stock.LastSale|currency }}</h3>
+<h3>Sector: {{ vm.stock.Sector }}</h3>
+<h3 ng-if="vm.isLoggedIn()"> Industry: {{ vm.stock.Industry }}</h3>
+<h3 ng-if="vm.isLoggedIn()"> IPO Year: {{ vm.stock.IPOyear }}</h3>
+<h4>Comments</h4>
 
-<p><small>{{ vm.hotel.location.address }}</small></p>
-
-<p>{{ vm.stock.description }}</p>
-<p>This hotel offers the following services:</p>
-<ul>
-  <li ng-repeat="service in vm.stock.services">{{ service }}</li>
-</ul>
-<h3>Reviews</h3>
-<ul>
-  <li ng-repeat="review in vm.stock.reviews"> <strong>{{ review.name }} says:</strong> {{ review.review }}</li>
-</ul>
 
 <div ng-if="vm.isLoggedIn()">
-  <form name="vm.reviewForm" ng-submit="vm.addReview()">
-    Your rating: <input type="number" name="rating" required ng-pattern="/^[1-5]$/" ng-model="vm.rating">
-    <div ng-show="vm.reviewForm.rating.$dirty && vm.reviewForm.rating.$invalid && vm.isSubmitted">
-      <p>Rating must be between 1-5.</p>
+  <form name="vm.commentForm" ng-submit="vm.addComment()">
 
+    Your comment: <textarea name="comment" required ng-model="vm.comment"></textarea>
+    <div ng-show="vm.commentForm.comment.$dirty && vm.isSubmitted">
+      <p>Please add a comment</p>
     </div>
 
-    Your review: <textarea name="review" required ng-model="vm.review"></textarea>
-    <div ng-show="vm.reviewForm.review.$dirty && vm.isSubmitted">
-      <p>Please add a review</p>
-    </div>
-
-    <button type="submit" class="btn">Add review</button>
+    <button type="submit" class="btn btn-primary" name="Add comment">Add comment</button>
   </form>
 </div>
