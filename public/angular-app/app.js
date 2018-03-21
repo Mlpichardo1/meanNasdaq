@@ -5,13 +5,13 @@ function config($httpProvider, $routeProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
 
   $routeProvider
-    .when('/', {
+      .when('/', {
       templateUrl: 'angular-app/main/main.html',
       access: {
         restricted: false
       }
     })
-    .when('/stocks', {
+      .when('/stocks', {
       templateUrl: 'angular-app/stock-list/stock-list.html',
       controller: StocksController,
       controllerAs: 'vm',
@@ -19,7 +19,7 @@ function config($httpProvider, $routeProvider) {
         restricted: false
       }
     })
-        .when('/stock/:Symbol', {
+      .when('/stock/:Symbol', {
       templateUrl: 'angular-app/stock-display/stock-display.html',
       controller: StockController,
       controllerAs: 'vm',
@@ -27,7 +27,7 @@ function config($httpProvider, $routeProvider) {
         restricted: false
       }
     })
-        .when('/register', {
+      .when('/register', {
       templateUrl: 'angular-app/register/register.html',
       controller: RegisterController,
       controllerAs: 'vm',
@@ -35,13 +35,21 @@ function config($httpProvider, $routeProvider) {
         restricted: false
       }
     })
-    .when('/profile', {
+      .when('/profile', {
       templateUrl: 'angular-app/profile/profile.html',
       access: {
         restricted: true
       }
     })
-    .otherwise({
+      .when('/search', {
+      templateUrl: 'angular-app/search/search-history.html',
+      controller: SearchController,
+      controllerAs: 'vm',
+      access: {
+        restricted: false
+      }
+    })
+     .otherwise({
       redirectTo: '/'
     });
 }

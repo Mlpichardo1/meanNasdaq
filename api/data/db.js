@@ -46,3 +46,4 @@ process.on('SIGTERM', function() {
 // schemas and models
 require('./stock.model.js');
 require('./users.model.js');
+require('./search.model.js');

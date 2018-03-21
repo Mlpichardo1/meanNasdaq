@@ -8,7 +8,9 @@
   body {
     /* Margin bottom by footer height */
     margin-bottom: 90px;
-    background-image: url('http://www.choicebankltd.com/file/2014/03/blue-background-large.png');
+    background: url('http://www.choicebankltd.com/file/2014/03/blue-background-large.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Righteous', cursive;
   
   }
   body > .container {

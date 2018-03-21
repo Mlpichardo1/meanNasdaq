@@ -1,0 +1,18 @@
+<h1>Search {{vm.title}}</h1>
+<form id = "search" ng-submit="vm.symbolSearch(); vm.saveSearch()">
+    <label>Search by Symbol:</label>
+    <input type="text" ng-model="vm.symbol"/>
+    
+  <button type="submit" class="btn btn-primary" name="search-symbol">Search</button>
+  </form>
+  
+  <h4>Search Result</h4>
+<p><a ng-href="#!/stock/{{vm.stock._id}}">{{vm.stock.Name}} | {{vm.stock.Symbol}}</a></p>  
+  
+  
+  <h4>Search History</h4>
+<ul>
+  <li ng-repeat="searches in vm.search.searches">
+    
+{{ searches.search }}</li>
+</ul>

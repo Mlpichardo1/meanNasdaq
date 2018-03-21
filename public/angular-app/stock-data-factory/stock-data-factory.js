@@ -29,16 +29,16 @@ function stockDataFactory($http) {
     }
 
     function searchAddOne(Symbol) {
-        return $http.post('/api/stocks/search/', symbol).then(complete).catch(failed);
+        return $http.post('/api/stocks/search/', Symbol).then(complete).catch(failed);
     }
 
     function searchGetAll() {
         return $http.get('/api/stocks/search/').then(complete).catch(failed);
     }
 
-function searchList() {
+    function searchList() {
      return $http.get('/api/stocks/search/').then(complete).catch(failed);   
-}
+    }
     
     function complete(response) {
         return response;

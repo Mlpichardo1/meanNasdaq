@@ -1,4 +1,21 @@
+<form class="search" ng-submit="vm.symbolSearch()">
+
+  <label>Search by Stock Symbol:</label>
+  <input type="text" ng-model="vm.symbol" />
+
+  <button type="submit" class="btn btn-primary" name="search-symbol">Search</button>
+</form>
+
+<h4>Search Result</h4>
+<p><a ng-href="#!/stock/{{vm.stock._id}}">{{vm.stock.Name}} | {{vm.stock.Symbol}}</a></p>
+
+<ul>
+  <li ng-repeat="search in vm.showSearches">{{search.Symbol}} | {{ search.createdOn }}</li>
+</ul>
+<button type="submit" class="btn btn-primary" ng-click="vm.showSearches()">Display Search History</button>
+
 <h1>{{ vm.title }}</h1>
 <ul>
   <li ng-repeat="stock in vm.stocks"><a ng-href="#!/stock/{{ stock._id }}">{{ stock.Symbol}} | {{ stock.Name }}</a></li>
 </ul>
+

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var ctrlStocks = require('../controllers/stocks.controllers.js');
-// var ctrlReviews = require('../controllers/reviews.controllers.js');
+var ctrlSearch = require('../controllers/search.controllers.js');
 var ctrlUsers = require('../controllers/users.controllers.js');
 
 // Stock routes
@@ -16,17 +16,16 @@ router
   .get(ctrlStocks.stocksGetOne)
   .put(ctrlStocks.stocksUpdateOne);
 
+// Search routes
+router
+  .route('/stocks/search/:symbol')
+  .get(ctrlStocks.getOneSymbol)
 
-// // Review routes
-// router
-//   .route('/hotels/:hotelId/reviews')
-//   .get(ctrlReviews.reviewsGetAll)
-//   .post(ctrlUsers.authenticate, ctrlReviews.reviewsAddOne);
-
-// router
-//   .route('/hotels/:hotelId/reviews/:reviewId')
-//   .get(ctrlReviews.reviewsGetOne)
-//   .put(ctrlReviews.reviewsUpdateOne);
+//search route to display saved search results 
+router
+  .route('/stocks/search/')
+  .post(ctrlSearch.searchAddOne)
+  .get(ctrlSearch.searchGetAll);
 
 // Authentication
 router
