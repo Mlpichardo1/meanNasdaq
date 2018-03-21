@@ -19,7 +19,7 @@ function config($httpProvider, $routeProvider) {
         restricted: false
       }
     })
-        .when('/stock/:id', {
+        .when('/stock/:Symbol', {
       templateUrl: 'angular-app/stock-display/stock-display.html',
       controller: StockController,
       controllerAs: 'vm',

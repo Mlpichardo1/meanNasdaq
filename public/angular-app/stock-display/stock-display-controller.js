@@ -2,21 +2,20 @@ angular.module('meannasdaq').controller('StockController', StockController);
 
 function StockController($route, $routeParams, $window, stockDataFactory, AuthFactory, jwtHelper) {
     var vm = this;
-    // vm.title= 'MEAN Nasdaq App';
     var id = $routeParams.id;
-    stockDataFactory.stockDisplay(id).then(function(response) {
-        console.log(response);
-        vm.stock = response.data;
-    });
-    
-    vm.isLoggedIn = function() {
-        if (AuthFactory.isLoggedIn) {
-            return true;
-        }
-        else {
-            return false;
+    var Symbol = $routeParams.Symbol;
+
+    vm.isLoggedIn = function(){
+        if (AuthFactory.isLoggedIn){
+        return true;
+        }else{
+        return false;
         }
     };
+    
+    stockDataFactory.stockDisplay(Symbol).then(function(response){
+        vm.stock = response.data;
+    });
 
     vm.addComment = function() {
         var token = jwtHelper.decodeToken($window.sessionStorage.token);
