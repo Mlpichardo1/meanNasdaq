@@ -1,47 +1,43 @@
 angular.module('meannasdaq').controller('StockController', StockController);
 
 function StockController($route, $routeParams, $window, stockDataFactory, AuthFactory, jwtHelper) {
-  var vm = this;
-  var id = $routeParams.id;
-  vm.isSubmitted = false;
-  stockDataFactory.stockDisplay(id).then(function(response) {
-    vm.stock = response.data;
-    vm.stars = _getStarRating(response.data.stars);
-  });
-
-  function _getStarRating(stars) {
-    return new Array(stars);
-  }
-
-  vm.isLoggedIn = function() {
-    if (AuthFactory.isLoggedIn) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  vm.addReview = function() {
-
-    var token = jwtHelper.decodeToken($window.sessionStorage.token);
-    var username = token.username;
-
-    var postData = {
-      name: username,
-      rating: vm.rating,
-      review: vm.review
-    };
-    if (vm.reviewForm.$valid) {
-      stockDataFactory.postReview(id, postData).then(function(response) {
-        if (response.status === 200) {
-          $route.reload();
+    var vm = this;
+    // vm.title= 'MEAN Nasdaq App';
+    var id = $routeParams.id;
+    stockDataFactory.stockDisplay(id).then(function(response) {
+        console.log(response);
+        vm.stock = response.data;
+    });
+    
+    vm.isLoggedIn = function() {
+        if (AuthFactory.isLoggedIn) {
+            return true;
         }
-      }).catch(function(error) {
-        console.log(error);
-      });
-    } else {
-      vm.isSubmitted = true;
-    }
-  };
+        else {
+            return false;
+        }
+    };
 
+    vm.addComment = function() {
+        var token = jwtHelper.decodeToken($window.sessionStorage.token);
+        var username = token.username;
+
+        var postData = {
+            //when function runs, returned data is stored in postData
+            comment: vm.comment
+        };
+        if (vm.commentForm.$valid) {
+            stockDataFactory.postComment(id, postData).then(function(response) {
+                console.log("line 32", response.status);
+                if (response.status === 201) {
+                    $route.reload();
+                }
+            }).catch(function(error) {
+                console.log(error);
+            });
+        }
+        else {
+            vm.isSubmitted = true;
+        }
+    };
 }

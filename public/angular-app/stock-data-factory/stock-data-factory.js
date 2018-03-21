@@ -14,10 +14,6 @@ function stockDataFactory($http) {
     function stockList() {
         return $http.get('/api/stocks').then(complete).catch(failed);
     }
-    //can add count above
-    // function stockList() {
-    //     return $http.get('/api/stocks?count=100').then(complete).catch(failed);
-    // }
 
     function stockDisplay(id) {
         return $http.get('/api/stock/' + id).then(complete).catch(failed);

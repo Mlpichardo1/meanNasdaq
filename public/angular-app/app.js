@@ -27,13 +27,20 @@ function config($httpProvider, $routeProvider) {
         restricted: false
       }
     })
-    
-    // .when('/profile', {
-    //   templateUrl: 'angular-app/profile/profile.html',
-    //   access: {
-    //     restricted: true
-    //   }
-    // })
+        .when('/register', {
+      templateUrl: 'angular-app/register/register.html',
+      controller: RegisterController,
+      controllerAs: 'vm',
+      access: {
+        restricted: false
+      }
+    })
+    .when('/profile', {
+      templateUrl: 'angular-app/profile/profile.html',
+      access: {
+        restricted: true
+      }
+    })
     .otherwise({
       redirectTo: '/'
     });

@@ -1,24 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">MEAN NASDAQ</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Stocks</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+<nav ng-controller="LoginController as vm" class="navbar navbar-default navbar-fixed-top" ng-init="vm.init()">
+ <div class="container">
+   <div class="navbar-header">
+     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+       <span class="sr-only">Toggle navigation</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+     <a class="navbar-brand" href="#!/">Nasdaq</a>
+   </div>
+   <div id="navbar" class="collapse navbar-collapse">
+     <ul class="nav navbar-nav">
+       <li ng-class="vm.isActiveTab('')" class="active"><a href="#!/">Home</a></li>
+       <li ng-class="vm.isActiveTab('stocks')"><a href="#!/stocks">Stocks</a></li>
+       <li ng-class="vm.isActiveTab('register')" ng-if="!vm.isLoggedIn()"><a href="#!/register">Register</a></li>
+       <li ng-class="vm.isActiveTab('profile')" ng-if="vm.isLoggedIn()"><a href="#!/profile">Profile</a></li>
+     </ul>
+     <form ng-if="!vm.isLoggedIn()" class="navbar-form navbar-right" role="login" ng-submit="vm.login()">
+      <div class="form-group" ng-class="{'has-error': vm.error}">
+        <input type="text" class="form-control input-sm" placeholder="Username" ng-model="vm.username" autocapitalize="none">
+      </div>
+      <div class="form-group" ng-class="{'has-error': vm.error}">
+        <input type="password" class="form-control input-sm" placeholder="Password" ng-model="vm.password" autocapitalize="none">
+      </div>
+      <button type="submit" class="btn btn-sm btn-success">Login</button>
     </form>
-  </div>
+    <ul ng-if="vm.isLoggedIn()" class="nav navbar-nav navbar-right">
+      <li><p class="navbar-text">Welcome back {{ vm.loggedInUser }}</p></li>
+      <li><button class="navbar-btn btn-sm btn-info" ng-click="vm.logout()">Logout</button></li>
+    </ul>
+       <div class="col-sm-3 col-md-3 pull-right">
+        <form class="navbar-form" role="search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+        </form>
+        </div>
+   </div>
+ </div>
 </nav>
