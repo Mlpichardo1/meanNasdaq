@@ -1,7 +1,7 @@
 <h2><a ng-href="{{ vm.stock.StockUrl }}" target="blank">{{ vm.stock.Symbol }}</a> {{ vm.stock.Name }}</h2>
 <h3>Last Sale: {{ vm.stock.LastSale|currency }}</h3>
 <h3>Sector: {{ vm.stock.Sector }}</h3>
-<h3> Industry: {{ vm.stock.Industry }}</h3>
+<h3>Industry: {{ vm.stock.Industry }}</h3>
 <h3 ng-if="vm.isLoggedIn()"> IPO Year: {{ vm.stock.IPOyear }}</h3>
 <h4>Comments</h4>
 
