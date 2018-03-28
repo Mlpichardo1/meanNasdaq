@@ -37,7 +37,7 @@ function stockDataFactory($http) {
     }
 
     function searchList() {
-     return $http.get('/api/stocks/search/').then(complete).catch(failed);   
+        return $http.get('/api/stocks/search/').then(complete).catch(failed);   
     }
     
     function complete(response) {
