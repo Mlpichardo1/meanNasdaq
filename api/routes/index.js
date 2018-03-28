@@ -19,11 +19,11 @@ router
 // Search routes
 router
   .route('/stocks/search/:symbol')
-  .get(ctrlStocks.getOneSymbol)
+  .get(ctrlStocks.getOneSymbol);
 
 //search route to display saved search results 
 router
-  .route('/stocks/search/')
+  .route('/stocks/search/saved')
   .post(ctrlSearch.searchAddOne)
   .get(ctrlSearch.searchGetAll);
 

@@ -15,21 +15,21 @@ function stockDataFactory($http) {
         return $http.get('/api/stocks').then(complete).catch(failed);
     }
     
-    function stockDisplay(Symbol){
-        return $http.get('/api/stocks/' + Symbol).then(complete).catch(failed);
+    function stockDisplay(symbol){
+        return $http.get('/api/stocks/' + symbol).then(complete).catch(failed);
     }
 
-    function postComment(Symbol, comment) {
-        return $http.post('/api/stock/' + Symbol + '/comments', comment).then(complete).catch(failed);
+    function postComment(symbol, comment) {
+        return $http.post('/api/stock/' + symbol + '/comments', comment).then(complete).catch(failed);
     }
     //'comment' at end is passing in data as second argument, the comment itself
 
-    function searchDisplay(Symbol) {
-        return $http.get('/api/stocks/search/' + Symbol).then(complete).catch(failed);
+    function searchDisplay(symbol) {
+        return $http.get('/api/stocks/search/' + symbol).then(complete).catch(failed);
     }
 
-    function searchAddOne(Symbol) {
-        return $http.post('/api/stocks/search/', Symbol).then(complete).catch(failed);
+    function searchAddOne(symbol) {
+        return $http.post('/api/stocks/search/saved/', symbol).then(complete).catch(failed);
     }
 
     function searchGetAll() {

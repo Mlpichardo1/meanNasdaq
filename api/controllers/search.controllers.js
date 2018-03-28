@@ -5,7 +5,7 @@ module.exports.searchAddOne = function(req, res) {
 
     var symbol = req.body.symbol;
     console.log("Inside searchAddOne", req.body)
-    console.log("POST search to search page", symbol);
+    console.log("POST search", symbol);
 
     Search.create({
             Symbol: symbol

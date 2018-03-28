@@ -131,10 +131,8 @@ module.exports.stocksUpdateOne = function(req, res) {
 };
 
 module.exports.getOneSymbol = function(req, res) {
-    var symbol = req.params.symbol;
+    var symbol = req.params.symbol.toUpperCase();
 
-    // var thisStock = stockData(stockId);
-    //can stockId be symbol?
     console.log("GET stockSymbol", symbol);
     Stock
 
