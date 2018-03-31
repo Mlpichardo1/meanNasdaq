@@ -8,7 +8,7 @@
   body {
     /* Margin bottom by footer height */
     margin-bottom: 90px;
-    background: url('http://www.choicebankltd.com/file/2014/03/blue-background-large.png') no-repeat center center fixed;
+    background: url('https://images8.alphacoders.com/436/436458.jpg') no-repeat center center fixed;
     background-size: cover;
     font-family: 'Righteous', cursive;
   
@@ -16,6 +16,11 @@
   body > .container {
     padding-top: 60px;
     background-color: #948B89;
+    border-color: #F5EFED;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 10px;
+    padding-bottom: 40px;
   }
   .padded {
     padding-top: 30px
